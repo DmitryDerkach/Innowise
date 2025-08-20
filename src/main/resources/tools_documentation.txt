@@ -1,0 +1,97 @@
+default_api:
+   eclipse_coder__createDirectories: Creates a directory structure (recursively) in the specified project.
+       directoryPath (str): The path of directories to create, relative to the project root. Do not include project name!
+       projectName (str): The name of the project where directories should be created
+   eclipse_coder__createFile: Create and open a new file in a specified project. Ensure the file doesn't already exist.
+       content (str): The content to write to the file
+       filePath (str): The path to the file relative to the project root. Do not include project name!
+       projectName (str): The name of the project where the file should be created
+   eclipse_coder__insertIntoFile: Insert content into a file at a specified line position, using 1-based line indexing.
+       content (str): The content to insert into the file
+       filePath (str): The path to the file relative to the project root. Do not include project name!
+       projectName (str): The name of the project containing the file
+       line (str, optional): The line number to which to insert the text (1-based index)
+   eclipse_coder__undoEdit: Undoes the last edit operation by restoring a file from its backup.
+       filePath (str): The path to the file relative to the project root. Do not include project name!
+       projectName (str): The name of the project containing the file
+   eclipse_coder__replaceString: Find and replace a specific string in a file, with optional line range for targeted replacement.
+       filePath (str): The path to the file relative to the project root. Do not include project name!
+       newString (str): The new text to insert in place of the old text
+       oldString (str): The text to replace (must match exactly, including whitespace and indentation)
+       projectName (str): The name of the project containing the file
+       endLine (str, optional): Optional line number to end searching at (1-based index)
+       startLine (str, optional): Optional line number to start searching from (1-based index)
+   memory__think: Use this tool to think about something. It will not obtain new information or perform changes, but will put your thought into a log, so that it is accessible to you. Use it for complex reasoning or as memory cache when you need to store some temporary information that you may consider useful to complete the task.
+       thought (str): A thought or information worth using in solving a task
+   webpage_reader__readWebPage: Reads the content of the given web site and returns its content as a markdown text.
+       url (str): A web site URL
+   duck_duck_search__webSearch: Performs a search using a Duck Duck Go search engine and returns the search result json.
+       query (str): A search query
+   time__currentTime: Returns the current date and time in the following format: yyyy-MM-dd HH:mm:ss
+       dummy (str, optional): Dummy parameter
+   time__convertTimeZone: Converts time from one time zone to another. Returns a converted time in the yyyy-MM-dd HH:mm:ss z format.
+       sourceZone (str): Source time zone id such as, such as Europe/Paris or CST. Default: system time zone
+       targetZone (str): Target time zone id, such as Europer/Paris or CST. Default: UTC
+       time (str): Date/time in the format yyyy-MM-dd HH:mm:ss
+   eclipse_ide__getJavaDoc: Get the JavaDoc for the given compilation unit. For example,a class B defined as a member type of a class A in package x.y should have athe fully qualified name "x.y.A.B".Note that in order to be found, a type name (or its top level enclosingtype name) must match its corresponding compilation unit name.
+       fullyQualifiedName (str): A fully qualified name of the compilation unit
+   eclipse_ide__getSource: Get the source for the given class.
+       fullyQualifiedClassName (str): A fully qualified class name of the Java class
+   eclipse_ide__formatCode: Formats code according to the current Eclipse formatter settings.
+       code (str): The code to be formatted
+       projectName (str, optional): Optional project name to use project-specific formatter settings
+   eclipse_ide__getMethodCallHierarchy: Retrieves the call hierarchy (callers) for a specified method to understand how it's used in the codebase.
+       fullyQualifiedClassName (str): The fully qualified name of the class containing the method
+       methodName (str): The name of the method to analyze
+       maxDepth (str, optional): Maximum depth of the call hierarchy to retrieve (default: 3)
+       methodSignature (str, optional): The signature of the method (optional, required if method is overloaded)
+   eclipse_ide__getCompilationErrors: Retrieves compilation errors and problems from the current workspace or a specific project.
+       maxResults (str, optional): Maximum number of problems to return (default: 50)
+       projectName (str, optional): The name of the specific project to check (optional, leave empty for all projects)
+       severity (str, optional): Filter by severity level: 'ERROR', 'WARNING', or 'ALL' (default)
+   eclipse_ide__getEditorSelection: Gets the currently selected text or lines in the active editor.
+       dummy (str, optional): Dummy parameter
+   eclipse_ide__getCurrentlyOpenedFile: Gets information about the currently active file in the Eclipse editor.
+       dummy (str, optional): Dummy parameter
+   eclipse_ide__getConsoleOutput: Retrieves the recent output from Eclipse console(s).
+       consoleName (str, optional): Name of the specific console to retrieve (optional, leave empty for all or most recent console)
+       includeAllConsoles (str, optional): Whether to include output from all available consoles (default: false)
+       maxLines (str, optional): Maximum number of lines to retrieve (default: 100)
+   eclipse_ide__getProjectProperties: Retrieves the properties and configuration of a specified project.
+       projectName (str): The name of the project to analyze
+   eclipse_ide__getProjectLayout: Get the file and folder structure of a specified project in a hierarchical format suitable for LLM processing.
+       projectName (str): The name of the project to analyze
+   eclipse_ide__readProjectResource: Read the content of a text resource from a specified project.
+       projectName (str): The name of the project containing the resource
+       resourcePath (str): The path to the resource relative to the project root
+   eclipse_ide__listProjects: List all available projects in the workspace with their detected natures (Java, C/C++, Python, etc.).
+       dummy (str, optional): Dummy parameter
+   eclipse_ide__runAllTests: Runs all tests in a specified project and returns the results.
+       projectName (str): The name of the project containing the tests
+       timeout (str, optional): Maximum time in seconds to wait for test completion (default: 60)
+   eclipse_ide__runPackageTests: Runs tests in a specific package and returns the results.
+       packageName (str): The fully qualified package name containing the tests
+       projectName (str): The name of the project containing the tests
+       timeout (str, optional): Maximum time in seconds to wait for test completion (default: 60)
+   eclipse_ide__runClassTests: Runs tests for a specific class and returns the results.
+       className (str): The fully qualified name of the test class
+       projectName (str): The name of the project containing the tests
+       timeout (str, optional): Maximum time in seconds to wait for test completion (default: 60)
+   eclipse_ide__runTestMethod: Runs a specific test method and returns the results.
+       className (str): The fully qualified name of the test class
+       methodName (str): The name of the test method to run
+       projectName (str): The name of the project containing the tests
+       timeout (str, optional): Maximum time in seconds to wait for test completion (default: 60)
+   eclipse_ide__findTestClasses: Finds all test classes in a project.
+       projectName (str): The name of the project to search
+   eclipse_ide__runMavenBuild: Runs a Maven build with the specified goals on a project.
+       goals (str): The Maven goals to execute (e.g., "clean install")
+       projectName (str): The name of the project to build
+       profiles (str, optional): Optional Maven profiles to activate
+       timeout (str, optional): Maximum time in seconds to wait for build completion (0 for no timeout)
+   eclipse_ide__getProjectDependencies: Gets Maven project dependencies.
+       projectName (str): The name of the Maven project
+   eclipse_ide__listMavenProjects: Lists all available Maven projects in the workspace.
+       dummy (str, optional): Dummy parameter
+   eclipse_ide__getEffectivePom: Gets the effective POM for a Maven project.
+       projectName (str): The name of the Maven project
